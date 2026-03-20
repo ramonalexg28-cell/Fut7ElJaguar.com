@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cobro de Inscripción</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@700&display=swap');
+        
+        body {
+            font-family: 'Comic Neue', cursive;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle, #fff 1px, transparent 1px),
+                radial-gradient(circle, #fff 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .card {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 
+                8px 8px 0 rgba(0, 0, 0, 0.8),
+                12px 12px 0 rgba(56, 239, 125, 0.5);
+            border: 5px solid #000;
+            position: relative;
+            z-index: 1;
+            transform: rotate(1deg);
+        }
+        
+        h2 {
+            font-family: 'Bangers', cursive;
+            text-align: center;
+            background: linear-gradient(45deg, #00b894, #00cec9);
+            color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 32px;
+            letter-spacing: 3px;
+            text-shadow: 
+                3px 3px 0 #000,
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000;
+            border: 4px solid #000;
+            transform: rotate(-1deg);
+            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.3);
+        }
+        
+        label {
+            display: block;
+            margin-top: 18px;
+            font-weight: bold;
+            font-size: 18px;
+            color: #2d3436;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border-radius: 10px;
+            border: 4px solid #000;
+            font-family: 'Comic Neue', cursive;
+            font-size: 16px;
+            font-weight: bold;
+            background: #fff;
+            box-shadow: 
+                inset 2px 2px 0 rgba(0, 0, 0, 0.1),
+                4px 4px 0 rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        input:focus,
+        select:focus {
+            outline: none;
+            transform: translate(-2px, -2px);
+            box-shadow: 
+                inset 2px 2px 0 rgba(0, 0, 0, 0.1),
+                6px 6px 0 rgba(0, 184, 148, 0.4);
+        }
+        
+        button {
+            margin-top: 25px;
+            width: 100%;
+            padding: 18px;
+            font-size: 24px;
+            font-family: 'Bangers', cursive;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #00b894, #55efc4);
+            color: white;
+            border: 5px solid #000;
+            border-radius: 15px;
+            cursor: pointer;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 
+                5px 5px 0 rgba(0, 0, 0, 0.8),
+                8px 8px 0 rgba(85, 239, 196, 0.3);
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        button:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 
+                3px 3px 0 rgba(0, 0, 0, 0.8),
+                5px 5px 0 rgba(85, 239, 196, 0.3);
+        }
+        
+        button:active {
+            transform: translate(5px, 5px);
+            box-shadow: none;
+        }
+        
+        .ok {
+            margin-top: 20px;
+            padding: 15px;
+            background: linear-gradient(45deg, #55efc4, #00b894);
+            border: 4px solid #000;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            color: #fff;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+            animation: pop 0.5s ease;
+        }
+        
+        @keyframes pop {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        /* Estrellas decorativas */
+        .star {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 25px solid rgba(255, 215, 0, 0.6);
+            border: 3px solid #000;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+        
+        .star:nth-child(1) {
+            top: 20px;
+            right: 20px;
+            animation-delay: 0s;
+        }
+        
+        .star:nth-child(2) {
+            bottom: 30px;
+            left: 30px;
+            animation-delay: 1.5s;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2) rotate(180deg);
+            }
+        }
+        
+        /* Efecto de explosión en el título */
+        h2::before {
+            content: "💥";
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 30px;
+            animation: bounce 1s infinite;
+        }
+        
+        h2::after {
+            content: "💥";
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 30px;
+            animation: bounce 1s infinite 0.5s;
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(-50%) scale(1);
+            }
+            50% {
+                transform: translateY(-50%) scale(1.3);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="card">
+        <h2>📝 Cobro de Inscripción 💵</h2>
+        <label>🆔 ID Cobro Inscripción</label>
+        <input id="ci_id">
+        <label>📋 ID Inscripción</label>
+        <input id="ci_ins">
+        <label>💳 Tipo de Pago</label>
+        <select id="ci_tipopago">
+            <option>1 - Efectivo</option>
+            <option>2 - Tarjeta</option>
+            <option>3 - Transferencia</option>
+        </select>
+        <label>📅 Fecha de pago</label>
+        <input type="date" id="ci_fecha">
+        <label>💰 Monto</label>
+        <input type="number" id="ci_monto">
+        <label>📄 Folio</label>
+        <input id="ci_folio">
+        <label>✅ Estado</label>
+        <select id="ci_estado">
+            <option>Pagado</option>
+            <option>Pendiente</option>
+        </select>
+        <button onclick="save()">💾 ¡Guardar!</button>
+        <div id="msg"></div>
+    </div>
+    <script>
+        function save() { 
+            const data = { 
+                id: ci_id.value, 
+                ins: ci_ins.value, 
+                tipo: ci_tipopago.value, 
+                fecha: ci_fecha.value, 
+                monto: ci_monto.value, 
+                folio: ci_folio.value, 
+                estado: ci_estado.value 
+            }; 
+            
+            const dataStr = JSON.stringify(data);
+            const savedData = {};
+            Object.keys(data).forEach(key => {
+                savedData[key] = data[key];
+            });
+            
+            msg.innerHTML = "<div class='ok'>🎉 ¡DATOS GUARDADOS CON ÉXITO! 🎉</div>"; 
+        }
+    </script>
+</body>
+</html>

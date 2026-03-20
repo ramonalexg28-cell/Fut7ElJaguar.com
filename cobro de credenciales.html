@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cobro de Credencial</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@700&display=swap');
+        
+        body {
+            font-family: 'Comic Neue', cursive;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle, #fff 1px, transparent 1px),
+                radial-gradient(circle, #fff 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            opacity: 0.1;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .card {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 
+                8px 8px 0 rgba(0, 0, 0, 0.8),
+                12px 12px 0 rgba(255, 215, 0, 0.5);
+            border: 5px solid #000;
+            position: relative;
+            z-index: 1;
+            transform: rotate(-1deg);
+        }
+        
+        h2 {
+            font-family: 'Bangers', cursive;
+            text-align: center;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 32px;
+            letter-spacing: 3px;
+            text-shadow: 
+                3px 3px 0 #000,
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000;
+            border: 4px solid #000;
+            transform: rotate(1deg);
+            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.3);
+        }
+        
+        label {
+            display: block;
+            margin-top: 18px;
+            font-weight: bold;
+            font-size: 18px;
+            color: #2d3436;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border-radius: 10px;
+            border: 4px solid #000;
+            font-family: 'Comic Neue', cursive;
+            font-size: 16px;
+            font-weight: bold;
+            background: #fff;
+            box-shadow: 
+                inset 2px 2px 0 rgba(0, 0, 0, 0.1),
+                4px 4px 0 rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        input:focus,
+        select:focus {
+            outline: none;
+            transform: translate(-2px, -2px);
+            box-shadow: 
+                inset 2px 2px 0 rgba(0, 0, 0, 0.1),
+                6px 6px 0 rgba(255, 107, 107, 0.4);
+        }
+        
+        button {
+            margin-top: 25px;
+            width: 100%;
+            padding: 18px;
+            font-size: 24px;
+            font-family: 'Bangers', cursive;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+            color: white;
+            border: 5px solid #000;
+            border-radius: 15px;
+            cursor: pointer;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 
+                5px 5px 0 rgba(0, 0, 0, 0.8),
+                8px 8px 0 rgba(255, 215, 0, 0.3);
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        button:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 
+                3px 3px 0 rgba(0, 0, 0, 0.8),
+                5px 5px 0 rgba(255, 215, 0, 0.3);
+        }
+        
+        button:active {
+            transform: translate(5px, 5px);
+            box-shadow: none;
+        }
+        
+        .ok {
+            margin-top: 20px;
+            padding: 15px;
+            background: linear-gradient(45deg, #7bed9f, #2ed573);
+            border: 4px solid #000;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            color: #fff;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+            animation: pop 0.5s ease;
+        }
+        
+        @keyframes pop {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        /* Burbujas decorativas */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border: 3px solid #000;
+            animation: float 6s infinite ease-in-out;
+        }
+        
+        .bubble:nth-child(1) {
+            width: 60px;
+            height: 60px;
+            top: -30px;
+            right: -30px;
+            animation-delay: 0s;
+        }
+        
+        .bubble:nth-child(2) {
+            width: 40px;
+            height: 40px;
+            bottom: -20px;
+            left: -20px;
+            animation-delay: 2s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="card">
+        <h2>💳 Cobro de Credencial 💰</h2>
+        <label>🆔 ID del Cobro</label>
+        <input id="cc_id">
+        <label>👤 ID Persona</label>
+        <input id="cc_persona">
+        <label>💵 Tipo de Pago</label>
+        <select id="cc_tipopago">
+            <option>1 - Efectivo</option>
+            <option>2 - Tarjeta</option>
+            <option>3 - Transferencia</option>
+        </select>
+        <label>📅 Fecha</label>
+        <input type="date" id="cc_fecha">
+        <label>💰 Monto</label>
+        <input type="number" id="cc_monto">
+        <label>📄 Folio</label>
+        <input id="cc_folio">
+        <label>✅ Estado</label>
+        <select id="cc_estado">
+            <option>Pagado</option>
+            <option>Pendiente</option>
+        </select>
+        <button onclick="save()">💾 ¡Guardar!</button>
+        <div id="msg"></div>
+    </div>
+    <script>
+        function save() { 
+            const data = { 
+                id: cc_id.value, 
+                persona: cc_persona.value, 
+                tipo: cc_tipopago.value, 
+                fecha: cc_fecha.value, 
+                monto: cc_monto.value, 
+                folio: cc_folio.value, 
+                estado: cc_estado.value 
+            }; 
+            
+            const dataStr = JSON.stringify(data);
+            const savedData = {};
+            Object.keys(data).forEach(key => {
+                savedData[key] = data[key];
+            });
+            
+            msg.innerHTML = "<div class='ok'>✨ ¡DATOS GUARDADOS CON ÉXITO! ✨</div>"; 
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categoría - Fut 7 El Jaguar</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Rubik:wght@400;500;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(255,255,255,0.03) 50px, rgba(255,255,255,0.03) 51px),
+                repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(255,255,255,0.03) 50px, rgba(255,255,255,0.03) 51px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Efectos flotantes */
+        body::after {
+            content: '⚽🏆⭐✨';
+            position: fixed;
+            top: 15%;
+            right: 5%;
+            font-size: 2.5rem;
+            opacity: 0.2;
+            animation: float 5s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px) rotate(-2deg); }
+            75% { transform: translateX(5px) rotate(2deg); }
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: 
+                0 12px 35px rgba(0,0,0,0.5),
+                inset 0 -6px 25px rgba(0,0,0,0.2),
+                0 0 0 10px rgba(255,255,255,0.1);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 6px solid #000;
+            z-index: 10;
+        }
+
+        header::before {
+            content: '🏆';
+            position: absolute;
+            top: -40px;
+            left: 10%;
+            font-size: 6rem;
+            opacity: 0.15;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        header::after {
+            content: '⚽';
+            position: absolute;
+            bottom: -40px;
+            right: 10%;
+            font-size: 6rem;
+            opacity: 0.15;
+            animation: float 4s ease-in-out infinite reverse;
+        }
+
+        header h1 {
+            font-family: 'Bangers', cursive;
+            color: #fff;
+            font-size: 3.5rem;
+            text-shadow: 
+                6px 6px 0 #000,
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000,
+                0 6px 20px rgba(0,0,0,0.6);
+            letter-spacing: 5px;
+            transform: skew(-3deg);
+            position: relative;
+            z-index: 1;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .menu-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        h2 {
+            font-family: 'Bangers', cursive;
+            color: #fff;
+            font-size: 2.8rem;
+            text-shadow: 
+                5px 5px 0 #000,
+                0 5px 15px rgba(0,0,0,0.6);
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .botones-categorias {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            perspective: 1000px;
+        }
+
+        .btn {
+            padding: 2.5rem 2rem;
+            border: 6px solid #000;
+            border-radius: 25px;
+            font-weight: 900;
+            cursor: pointer;
+            font-size: 1.8rem;
+            transition: all 0.4s ease;
+            box-shadow: 
+                8px 8px 0 #000,
+                0 12px 30px rgba(0,0,0,0.5);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-family: 'Bangers', cursive;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn::after {
+            content: '⚡';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 3rem;
+            opacity: 0.2;
+            transform: rotate(-15deg);
+        }
+
+        .btn:hover {
+            transform: translateY(-10px) scale(1.05) rotateX(10deg);
+            box-shadow: 
+                12px 12px 0 #000,
+                0 18px 40px rgba(0,0,0,0.6);
+            animation: shake 0.5s ease;
+        }
+
+        .btn:active {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 
+                4px 4px 0 #000,
+                0 6px 15px rgba(0,0,0,0.4);
+        }
+
+        /* Colores específicos para cada botón */
+        #btnEquipos {
+            background: linear-gradient(135deg, #4ecca3 0%, #2ecc71 100%);
+            color: #000;
+        }
+
+        #btnEquipos::after {
+            content: '👥';
+        }
+
+        #btnRol {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            color: #000;
+        }
+
+        #btnRol::after {
+            content: '📅';
+        }
+
+        #btnHorarios {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            color: #fff;
+        }
+
+        #btnHorarios::after {
+            content: '⏰';
+        }
+
+        #btnPuntos {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: #fff;
+        }
+
+        #btnPuntos::after {
+            content: '🏆';
+        }
+
+        .btn-volver {
+            background: linear-gradient(135deg, #636e72 0%, #2d3436 100%);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border: 5px solid #000;
+            border-radius: 20px;
+            font-weight: 900;
+            cursor: pointer;
+            font-size: 1.3rem;
+            box-shadow: 
+                6px 6px 0 #000,
+                0 10px 25px rgba(0,0,0,0.4);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Rubik', sans-serif;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+            width: fit-content;
+        }
+
+        .btn-volver:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 
+                3px 3px 0 #000,
+                0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn-volver:active {
+            transform: translate(6px, 6px);
+            box-shadow: 0 0 0 #000;
+        }
+
+        /* Contenedor de información adicional */
+        .info-categoria {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            border: 5px solid #000;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 
+                6px 6px 0 #000,
+                0 10px 25px rgba(0,0,0,0.4);
+            text-align: center;
+        }
+
+        .info-categoria p {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2d3436;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-categoria .emoji-grande {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 1rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Efectos de partículas */
+        .particulas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particula {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.1;
+            animation: caer 10s linear infinite;
+        }
+
+        @keyframes caer {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .particula:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particula:nth-child(2) { left: 25%; animation-delay: 2s; }
+        .particula:nth-child(3) { left: 40%; animation-delay: 4s; }
+        .particula:nth-child(4) { left: 55%; animation-delay: 1s; }
+        .particula:nth-child(5) { left: 70%; animation-delay: 3s; }
+        .particula:nth-child(6) { left: 85%; animation-delay: 5s; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                font-size: 1.4rem;
+                padding: 2rem 1.5rem;
+            }
+
+            .botones-categorias {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .btn-volver {
+                font-size: 1.1rem;
+                padding: 1rem 2rem;
+            }
+        }
+
+        /* Scrollbar personalizado */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+            border: 2px solid #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            border: 2px solid #000;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Partículas flotantes -->
+    <div class="particulas">
+        <div class="particula">⚽</div>
+        <div class="particula">🏆</div>
+        <div class="particula">⭐</div>
+        <div class="particula">⚽</div>
+        <div class="particula">🏆</div>
+        <div class="particula">⭐</div>
+    </div>
+
+    <header>
+        <h1 id="tituloCategoria">⚡ CATEGORÍA ⚡</h1>
+    </header>
+
+    <main class="menu-container">
+        <div class="info-categoria">
+            <span class="emoji-grande">🎯</span>
+            <p>Selecciona una opción para administrar tu categoría</p>
+        </div>
+
+        <h2>🎮 Opciones 🎮</h2>
+        <div class="botones-categorias">
+            <button class="btn" id="btnEquipos">Equipos</button>
+            <button class="btn" id="btnRol">Rol de Juegos</button>
+            <button class="btn" id="btnHorarios">Horarios</button>
+            <button class="btn" id="btnPuntos">Puntos & Goles</button>
+        </div>
+
+        <button class="btn-volver" onclick="location.href='menu.html'">⬅ Volver al Menú</button>
+    </main>
+
+    <script>
+        // Obtener el nombre de la categoría desde la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const nombreCategoria = urlParams.get('nombre');
+
+        if (!nombreCategoria) {
+            alert("⚠️ Error: No se especificó una categoría");
+            location.href = 'menu.html';
+        }
+
+        // Actualizar el título
+        document.getElementById('tituloCategoria').textContent = `⚡ ${nombreCategoria.toUpperCase()} ⚡`;
+
+        // Configurar botones para pasar la categoría como parámetro
+        document.getElementById('btnEquipos').onclick = () => {
+            location.href = `equipos.html?categoria=${encodeURIComponent(nombreCategoria)}`;
+        };
+
+        document.getElementById('btnRol').onclick = () => {
+            location.href = `rol.html?categoria=${encodeURIComponent(nombreCategoria)}`;
+        };
+
+        document.getElementById('btnHorarios').onclick = () => {
+            location.href = `horarios.html?categoria=${encodeURIComponent(nombreCategoria)}`;
+        };
+
+        document.getElementById('btnPuntos').onclick = () => {
+            location.href = `puntos.html?categoria=${encodeURIComponent(nombreCategoria)}`;
+        };
+
+        // Efecto de sonido visual al hacer hover en botones
+        const botones = document.querySelectorAll('.btn');
+        botones.forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                btn.style.transform = 'translateY(-10px) scale(1.05)';
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
